@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.digimetest.AllPostsActivity">
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="@string/user"
+        android:gravity="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/post"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_toRightOf="@id/user"
+        android:text="@string/post_title"
+        android:gravity="center"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/post_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/user"
+        android:background="@drawable/component_top_border"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+</RelativeLayout>

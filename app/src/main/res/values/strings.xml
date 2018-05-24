@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DigiMeTest</string>
+
+    <string name="user">User</string>
+    <string name="post_title">Post title</string>
+    <string name="post_body">Post body</string>
+    <string name="view_comments">View comments</string>
+    <string name="number_of_comments">0</string>
+    <string name="comments">Comments:</string>
+    <string name="user_name">User name</string>
+
+</resources>
