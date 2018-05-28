@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">DigiMeTest</string>
 
-    <string name="user">User</string>
-    <string name="post_title">Post title</string>
-    <string name="post_body">Post body</string>
-    <string name="view_comments">View comments</string>
-    <string name="number_of_comments">0</string>
-    <string name="comments">Comments:</string>
+    <string name="custom_app_name">DigiMe - TestApp</string>
+
+    <string name="comment_name">Comment name</string>
+    <string name="comment_body">Comment body</string>
+    <string name="comment_expand">More</string>
+    <string name="comment_collapse">Less</string>
+
     <string name="user_name">User name</string>
+
+    <string name="post_title">Post title</string>
+    <string name="post_info">Post info</string>
+
+    <string name="error_invalid_response">Invalid response</string>
+    <string name="error_no_response">No response</string>
+    <string name="error_message">Response failed due to: </string>
+    <string name="no_connection">No wifi connection</string>
 
 </resources>

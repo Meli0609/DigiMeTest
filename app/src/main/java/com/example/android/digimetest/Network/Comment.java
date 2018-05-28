@@ -9,21 +9,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class Comment {
 
-   @SerializedName("postId")
-   @Expose
-   private Integer postId;
-   @SerializedName("id")
-   @Expose
-   private Integer id;
-   @SerializedName("name")
-   @Expose
-   private String name;
-   @SerializedName("email")
-   @Expose
-   private String email;
-   @SerializedName("body")
-   @Expose
-   private String body;
+    @SerializedName("postId")
+    @Expose
+    private Integer postId;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("body")
+    @Expose
+    private String body;
 
     public Integer getPostId() {
         return postId;

@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.digimetest.AllPostsActivity">
+    tools:context="com.example.android.digimetest.AllPostsActivity"
+    android:background="#381F3C">
 
     <TextView
-        android:id="@+id/user"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:text="@string/user"
-        android:gravity="center"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/post"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_toRightOf="@id/user"
-        android:text="@string/post_title"
-        android:gravity="center"
-        android:textSize="24sp" />
+        android:id="@+id/list_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/light_grey"
+        android:textSize="16sp" />
 
     <ListView
         android:id="@+id/post_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/user"
-        android:background="@drawable/component_top_border"
+        android:layout_below="@+id/list_header"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:divider="#00000000"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/reload_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/reload_icon"
+        android:background="@android:color/transparent"
+        />
 
 </RelativeLayout>

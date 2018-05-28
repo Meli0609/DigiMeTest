@@ -2,87 +2,113 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-
-
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/user_avatar"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:src="@drawable/download"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#381F3C">
 
     <TextView
-        android:id="@+id/user_name"
-        android:layout_width="fill_parent"
-        android:layout_height="25dp"
-        android:layout_toRightOf="@id/user_avatar"
-        android:background="@drawable/component_bottom_border"
-        android:text="@string/user_name"
-        android:textSize="18sp"
-        android:textStyle="bold|italic" />
+        android:id="@+id/post_info_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="12dp"
+        android:textAlignment="viewStart"
+        android:text="@string/post_info"
+        android:textColor="@color/light_grey"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/post_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_below="@id/post_info_header"
+        android:background="#381F3C">
+
+        <RelativeLayout
+            android:layout_width="350dp"
+            android:layout_height="190dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/user_avatar"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:padding="6dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/download"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/user_avatar"
+                android:gravity="center"
+                android:textColor="@color/light_grey"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/user_avatar"
+                android:paddingStart="30dp"
+                android:paddingEnd="5dp"
+                android:paddingTop="7dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/post_body"
+                android:layout_width="250dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/post_title"
+                android:layout_toEndOf="@+id/user_avatar"
+                android:paddingStart="30dp"
+                android:paddingEnd="5dp"
+                android:paddingTop="12dp"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/post_title"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_below="@id/user_name"
-        android:layout_toRightOf="@id/user_avatar"
-        android:background="@drawable/component_bottom_border"
-        android:gravity="center"
-        android:text="@string/post_body"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:id="@+id/comments_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey"
+        android:layout_below="@+id/post_info_layout"
+        android:paddingStart="15dp"
+        android:paddingTop="12dp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/light_grey"
+        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/post_body"
-        android:layout_width="fill_parent"
-        android:layout_height="110dp"
-        android:layout_below="@id/user_avatar"
-        android:background="@drawable/component_bottom_border"
-        android:text="@string/post_body"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/post_comments"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/post_body"
-        android:gravity="center"
-        android:text="@string/comments"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/number_of_comments"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/post_body"
-        android:layout_toRightOf="@id/post_comments"
-        android:gravity="center"
-        android:text="@string/number_of_comments"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/view_comments"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/post_body"
-        android:layout_toRightOf="@id/number_of_comments"
-        android:background="@drawable/component_left_border"
-        android:gravity="center"
-        android:text="@string/view_comments"
-        android:textSize="18sp" />
-
-    <ListView
+     <ListView
         android:id="@+id/comment_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/view_comments"
-        android:background="@drawable/component_top_border"
+        android:layout_below="@+id/comments_header"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:divider="#00000000"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

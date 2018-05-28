@@ -1,7 +1,7 @@
 package com.example.android.digimetest.Adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,23 +29,20 @@ import retrofit2.Response;
 
 public class PostListItem extends ArrayAdapter<Post> {
 
-    private ArrayList<Post> post;
     Context mContext;
 
-    // View lookup cache
     private static class ViewHolder {
-        TextView title;
+        TextView title, userName;
         CircleImageView avatar;
     }
 
+    /*
+    List Item View Holder
+     */
     public PostListItem(ArrayList<Post> data, Context context) {
         super(context, R.layout.post_list_item_layout, data);
-        this.post = data;
         this.mContext = context;
-
     }
-
-    private int lastPosition = -1;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,44 +55,73 @@ public class PostListItem extends ArrayAdapter<Post> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.post_list_item_layout, parent, false);
-            viewHolder.title = (TextView) convertView.findViewById(R.id.post_title);
-            viewHolder.avatar = (CircleImageView) convertView.findViewById(R.id.avatar);
+            viewHolder.title = convertView.findViewById(R.id.post_title);
+            viewHolder.userName = convertView.findViewById(R.id.user_name);
+            viewHolder.avatar = convertView.findViewById(R.id.avatar);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        lastPosition = position;
-
-        viewHolder.title.setText(post.getTitle());
-        viewHolder.title.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-
-        getUserEmailById(post.getUserId(), viewHolder.avatar);
+        viewHolder.title.setText(post.getTitle().replaceAll("\\s+", " "));
+        Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/amaranth.ttf");
+        viewHolder.title.setTypeface(face);
+        getUserById(post.getUserId(), viewHolder.avatar, viewHolder.userName);
 
         return convertView;
     }
 
-    private void getUserEmailById(int userId, final CircleImageView avatar)
-    {
+    /*
+    Get User info by id
+     */
+    private void getUserById(final int userId, final CircleImageView avatar, final TextView userName) {
         RequestInterface service = RetrofitClient.getRetrofitInstance().create(RequestInterface.class);
-        Call<User> call = service.getUser(String.valueOf(userId));
-        call.enqueue(new Callback<User>() {
+        Call<ArrayList<User>> call = service.getUser(String.valueOf(userId));
+        call.enqueue(new Callback<ArrayList<User>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                if (response.body() != null) {
 
-                setUserAvatar("https://api.adorable.io/avatars/285/" + response.body().getEmail() + ".png", avatar);
+                    setUserAvatar("https://api.adorable.io/avatars/285/"
+                                  + response.body().get(0).getEmail()
+                                  + ".png", avatar);
+                    userName.setText(response.body().get(0).getName());
+                    Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/lobster.ttf");
+                    userName.setTypeface(face);
+
+                } else {
+                    stopListLoad(mContext.getResources().getString(R.string.error_invalid_response));
+                }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(mContext, "Request failed", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ArrayList<User>> call, Throwable response) {
+                stopListLoad(mContext.getResources().getString(R.string.error_no_response));
             }
         });
     }
 
-    private void setUserAvatar(String url, CircleImageView avatar)
-    {
+    /*
+    Set user avatar by image Url
+     */
+    private void setUserAvatar(String url, CircleImageView avatar) {
         Picasso.get().load(url).into(avatar);
+    }
+
+    /*
+    Stop listView item load, if get post request is failing
+     */
+    private void stopListLoad(String errorMessage) {
+
+        Toast.makeText(mContext, mContext.getResources().getString(R.string.error_message) + errorMessage,
+                       Toast.LENGTH_LONG).show();
+        try {
+            this.finalize();
+        }catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }
